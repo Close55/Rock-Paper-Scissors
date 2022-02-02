@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <script>
+      function computerPlay() {
+        let randNum = Math.floor(Math.random() * 3);
+        switch (randNum) {
+          case 0:
+            return "Rock";
+            break;
+          case 1:
+            return "Paper";
+            break;
+          case 2:
+            return "Scissors";
+            break;
+        }
+      }
+      function playRound(playerSelection, computerSelection) {
+        // 0 is a win, 1 is a loss, 2 is a tie
+        let result = 0;
+        // If strings are equal, draw
+        if (playerSelection == computerSelection) result = 2;
+        // Just check for losing conditions. Win is already set to true.
+        else if (playerSelection == "Paper" && computerSelection == "Scissors")
+          result = 1;
+        else if (playerSelection == "Rock" && computerSelection == "Paper")
+          result = 1;
+        else if (playerSelection == "Scissors" && computerSelection == "Rock")
+          result = 1;
+
+        return result;
+      }
+
+      function game() {
+        let playerScore = 0;
+        let computerScore = 0;
+
+        for (let i = 0; i < 5; i++) {
+          let playerSelection = prompt();
+          let computerSelection = computerPlay();
+          let temp = playRound(playerSelection, computerSelection);
+          if (temp == 0) {
+            console.log(
+              `You win! ${playerSelection} beats ${computerSelection}`
+            );
+            playerScore++;
+          } else if (temp == 1) {
+            console.log(
+              `You lost! ${playerSelection} loses to ${computerSelection}`
+            );
+            computerScore++;
+          } else {
+            console.log(`Draw. ${playerSelection} ties ${computerSelection}`);
+          }
+          console.log(`You: ${playerScore}\nComputer: ${computerScore}`);
+        }
+        return;
+      }
+      game();
+    </script>
+  </body>
+</html>
